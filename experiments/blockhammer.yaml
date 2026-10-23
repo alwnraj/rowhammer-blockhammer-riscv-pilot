@@ -1,0 +1,47 @@
+Frontend:
+  Translation:
+    impl: RandomTranslation
+    max_addr: 17179869184
+  clock_ratio: 8
+  impl: BHO3
+  inst_window_depth: 128
+  llc_capacity_per_core: 2MB
+  llc_num_mshr_per_core: 16
+  no_wait_traces:
+  - example_rh_physaddr.trace
+  num_expected_insts: 500000
+  num_max_cycles: 2000000
+  traces:
+  - example_inst.trace
+MemorySystem:
+  AddrMapper:
+    impl: RoBaRaCoCh_with_rit
+  BHDRAMController:
+    BHScheduler:
+      impl: BlockingScheduler
+    RefreshManager:
+      impl: AllBank
+    RowPolicy:
+      cap: 4
+      impl: ClosedRowPolicy
+    impl: BHDRAMController
+    plugins:
+    - ControllerPlugin:
+        impl: RFMManager
+        rfm_thresh: 80
+    - ControllerPlugin:
+        bf_ctr_thresh: 32
+        bf_num_rh: 4096
+        impl: BlockHammer
+  DRAM:
+    RFM:
+      BRC: 2
+    impl: DDR5-VRR
+    org:
+      channel: 1
+      preset: DDR5_16Gb_x8
+      rank: 2
+    timing:
+      preset: DDR5_3200AN
+  clock_ratio: 3
+  impl: BHDRAMSystem

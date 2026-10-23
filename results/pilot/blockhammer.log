@@ -1,0 +1,76 @@
+Trace ID - Name Mapping:
+name_trace_0: example_inst.trace
+name_trace_1: example_rh_physaddr.trace
+[Ramulator::DDR5-VRR] nVRR: 383
+[Ramulator::DDR5-VRR] nRFM1: 471
+[Ramulator::DDR5-VRR] nRFMsb: 416
+Frontend:
+  impl: BHO3
+  memory_requests_recorded_core_1: 4433
+  memory_access_cycles_recorded_core_1: 4381339
+  cycles_recorded_core_1: 217439
+  insts_recorded_core_1: 4418
+  memory_requests_recorded_core_0: 166670
+  cycles_recorded_core_0: 217439
+  llc_write_misses: 9
+  llc_mshr_unavailable: 65659
+  llc_read_misses: 217476
+  llc_eviction: 4418
+  insts_recorded_core_0: 500000
+  num_expected_insts: 500000
+  llc_write_access: 33334
+  memory_access_cycles_recorded_core_0: 870764
+  llc_read_access: 350775
+  llc_mshr_blacklisted: 147347
+  Translation:
+    impl: RandomTranslation
+
+
+MemorySystem:
+  impl: BHDRAMSystem
+  total_num_other_requests: 0
+  total_num_write_requests: 0
+  total_num_read_requests: 4439
+  memory_system_cycles: 81540
+
+  DRAM:
+    impl: DDR5-VRR
+    total_vrr_cycles_rank1: 0
+    total_vrr_cycles_rank0: 0
+    total_rfm_cycles_rank1: 0
+    total_rfm_cycles_rank0: 0
+  AddrMapper:
+    impl: RoBaRaCoCh_with_rit
+
+
+  BHDRAMController:
+    impl: BHDRAMController
+    id: Channel 0
+    controller_num_row_conflicts: 4343
+    controller_num_row_hits: 1
+    controller_core_row_conflicts_1: 4342
+    controller_core_row_misses_0: 5
+    controller_core_row_hits_1: 0
+    controller_core_row_hits_0: 1
+    controller_core_row_conflicts_0: 1
+    controller_num_row_misses: 4423
+    controller_core_row_misses_1: 4418
+    BHScheduler:
+      impl: BlockingScheduler
+    RefreshManager:
+      impl: AllBank
+
+
+    RowPolicy:
+      impl: ClosedRowPolicy
+      num_close_reqs: 0
+
+
+    ControllerPlugin:
+      impl: RFMManager
+      rfm_counter: 7
+    ControllerPlugin:
+      impl: BlockHammer
+
+
+
